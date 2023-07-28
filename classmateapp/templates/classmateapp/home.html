@@ -1,0 +1,40 @@
+{% extends 'main.html' %}
+
+{%block content%}
+<style>
+    .home-container{
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr;
+    }
+</style>
+
+<dev class="home-container">
+
+    <dev>
+        {% include 'classmateapp/topics.html'%}
+    </dev>
+
+    <dev>
+        <h4>{{rooms.count}} Rooms Available</h4>
+        <a href="{% url 'create-room' %}">Create Room</a>
+        <hr>
+        <dev>
+            {% for room in rooms %}
+                <dev>
+                    <a href="{% url 'update-room' room.id%}">Edit Room</a>
+                    <a href="{% url 'delete-room' room.id%}">Delete Room</a>
+                    <br><br>
+                    <a href="{% url 'user-profile' room.host_user.id%}">@{{room.host_user.username}}</a>
+                    <h3><a href="{% url 'room' room.id %}">{{room.name}}</a></h3>
+                    <small>{{room.topic.name}}</small>
+                    <hr>
+                </dev>
+            {% endfor %}
+        </dev>
+    </dev>
+
+    <dev>
+        {% include 'classmateapp/activities.html'%}
+    </dev>
+</dev>
+{% endblock %}

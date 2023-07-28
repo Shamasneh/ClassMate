@@ -1,0 +1,34 @@
+{% extends 'main.html' %}
+
+{%block content%}
+<h1>
+    {{user.username}}
+</h1>
+<style>
+    .profile-container{
+        display: grid;
+        grid-template-columns: 1fr 3fr 1fr;
+    }
+</style>
+<dev class="profile-container">
+    <dev>
+        {% include 'classmateapp/topics.html'%}
+    </dev>
+    <dev>
+        {% for room in rooms %}
+            <dev>
+                <a href="{% url 'update-room' room.id%}">Edit Room</a>
+                <a href="{% url 'delete-room' room.id%}">Delete Room</a>
+                <br><br>
+                <a href="{% url 'user-profile' room.host_user.id%}">@{{room.host_user.username}}</a>
+                <h5>{{room.id}} -- <a href="{% url 'room' room.id %}">{{room.name}}</a></h5>
+                <small>{{room.topic.name}}</small>
+                <hr>
+            </dev>
+        {% endfor %}
+    </dev>
+    <dev>
+        {% include 'classmateapp/activities.html'%}
+    </dev>
+</dev>
+{%endblock%}

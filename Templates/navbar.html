@@ -1,0 +1,25 @@
+<style>
+    .nav-cont{
+        display: grid;
+        grid-template-columns: 2fr 6fr 2fr;
+    }
+</style>
+<dev class="nav-cont">
+    <dev>
+    <a href="/">Home page</a>
+    </dev>
+    <dev>
+        <form method="get" action="{% url 'home' %}">
+            <input type="text" name="query" placeholder="Search for Room">
+        </form>
+    </dev>
+    <dev>
+        {% if request.user.is_authenticated %}
+            <p>Logged in as {{user.username}}<a href="{% url 'logout' %}">Logout</a></p>
+        {% else %}
+            <a href="{% url 'login' %}">Login</a>
+        {% endif %}
+    </dev>
+</dev>
+
+<hr>
